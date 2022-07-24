@@ -1,0 +1,21 @@
+# https://leetcode.com/problems/find-pivot-index/
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        for index, value in enumerate(nums):
+            if index == 0 and sum(nums[index + 1:]) == 0 :
+                return 0
+            elif index ==( len(nums)-1) and sum(nums[:-1])==0 or sum(nums[:index]) == sum(nums[index + 1:]):
+                return index
+        return -1
+        
+        
+  #another solution :
+  class Solution(object):
+    def pivotIndex(self, nums):
+        S = sum(nums)
+        leftsum = 0
+        for i, x in enumerate(nums):
+            if leftsum == (S - leftsum - x):
+                return i
+            leftsum += x
+        return -1
